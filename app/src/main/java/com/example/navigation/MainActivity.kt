@@ -13,6 +13,11 @@ import androidx.compose.ui.tooling.preview.Preview
 //navigation import rememberNavController()
 import androidx.navigation.compose.rememberNavController
 import com.example.navigation.ui.theme.NavigationTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.composable
+import com.example.navigation.ui.theme.FeedScreen
+import com.example.navigation.ui.theme.ProfileScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +30,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
+                    NavigationAppHost(navController = navController)
                 }
             }
         }
@@ -32,4 +38,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable()
-fun NavigationAppHost(){}
+fun NavigationAppHost(navController: NavHostController){
+    NavHost(navController = navController, startDestination="home"){
+        composable(route = "home"){ HomeScreen(navController) }
+        composable(route = "feed"){ FeedScreen() }
+        composable(route = "profile"){ ProfileScreen() }
+    }
+}
