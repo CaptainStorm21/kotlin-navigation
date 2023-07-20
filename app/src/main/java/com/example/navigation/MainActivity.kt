@@ -19,6 +19,14 @@ import androidx.navigation.compose.composable
 import com.example.navigation.ui.theme.FeedScreen
 import com.example.navigation.ui.theme.ProfileScreen
 
+//refactoring the nav contorllers
+
+sealed class Destination(val route: String){
+    object Home: Destination(route = "Home")
+    object Feed: Destination(route = "Feed")
+    object Profile: Destination(route = "Profile")
+}
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +48,8 @@ class MainActivity : ComponentActivity() {
 @Composable()
 fun NavigationAppHost(navController: NavHostController){
     NavHost(navController = navController, startDestination="home"){
-        composable(route = "home"){ HomeScreen(navController) }
-        composable(route = "feed"){ FeedScreen() }
-        composable(route = "profile"){ ProfileScreen() }
+        composable(Destination.Home.route){ HomeScreen(navController) }
+        composable(Destination.Feed.route){ FeedScreen(navController) }
+        composable(Destination.Profile.route){ ProfileScreen(navController) }
     }
 }
