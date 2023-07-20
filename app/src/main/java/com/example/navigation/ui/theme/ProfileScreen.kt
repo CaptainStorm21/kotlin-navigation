@@ -22,6 +22,7 @@ fun ProfileScreen(navController: NavHostController){
 
         Button(onClick = {navController.navigate(Destination.Feed.route) {
             popUpTo(Destination.Home.route)
+            launchSingleTop=true
         } }) {
             Text(text = "to Feed")
         }
