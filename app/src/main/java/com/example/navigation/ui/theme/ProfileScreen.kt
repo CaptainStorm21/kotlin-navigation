@@ -26,6 +26,11 @@ fun ProfileScreen(navController: NavHostController){
         } }) {
             Text(text = "to Feed")
         }
+        Button(onClick = {navController.navigate(Destination.List.route){
+            popUpTo(Destination.List.route)
+        }}) {
+            Text(text = "to the List")
+        }
         Button(onClick = {navController.popBackStack() }) {
             Text(text = "back")
         }
